@@ -8,6 +8,10 @@
     "dev": "nodemon main"
   },
   "author": "Raj Nakarja",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/noden-org/noden-membership-app"
+  },
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
