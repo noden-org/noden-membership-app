@@ -1,0 +1,21 @@
+{
+  "name": "noden-membership-app",
+  "version": "1.0.0",
+  "description": "A web app to create and check Noden community memberships.",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main",
+    "dev": "nodemon main"
+  },
+  "author": "Raj Nakarja",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "needle": "^3.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
