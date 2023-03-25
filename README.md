@@ -2,7 +2,7 @@
 
 ## Non developer 🤔
 
-This is where we build the Noden membership app. If you just want to use it. Go to the link [here 🚀](https://noden-membership-app-production.up.railway.app)
+This is where we build the Noden membership app. If you just want to use it. Go to the link [here 🚀](https://membership.noden.org)
 
 ## Hello developer 🧑‍💻
 
