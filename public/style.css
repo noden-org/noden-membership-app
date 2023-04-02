@@ -1,3 +1,8 @@
 p {
     font-size: xx-large;
 }
+
+body {
+    overflow: hidden;
+
+}
