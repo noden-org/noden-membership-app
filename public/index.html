@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="./style.css">
 
+    <script type="module" src="./main.js"></script>
+
     <!-- PWA settings -->
     <link rel="manifest" href="./manifest.json">
     <meta name="viewport" content="initial-scale=1.0 user-scalable=no">
@@ -39,28 +41,19 @@
 
 <body>
     <header>
-
         <img class="logo" src="./img/noden-favicon-128.png" alt="Noden Logo">
         <h1>Noden | <b>Membership</b></h1>
     </header>
 
-    <div class="blurb">
-        Signup, view and manage your Noden membership from here.<br>
-        To get started, enter your email.
+    <div class="main">
+        <p id="name-text"><b>Hey there member! </b>Want to join or check your membership?</p>
+        <input id="email-box" type="email" placeholder="amazing.soul@noden.org">
+        <a id="status-label" class="status-label" href="#">enter your email</a>
+        <canvas id="qrcode"></canvas>
+        <a id="manage-membership-link" class="manage-membership-link" target="_blank" hidden
+            href="https://app.moonclerk.com/portal/7qk86mrpwe6/signin">Manage membership?</a>
+        <!-- <a href="https://teamup.com/ksec34ba03935daa85" class="calendar-link" target="_blank">Check the calendar</a> -->
     </div>
-
-    <div class="text-boxes">
-        <div style="display: flex; width: 100%;">
-            <input type="email" id="email-box" placeholder="Enter your email">
-            <button>Go</button>
-        </div>
-        Email not found. <a href="https://app.moonclerk.com/pay/1jxtp83bttl8">Secure sign up!</a>
-    </div>
-
-    <div class="info">
-        <a href="https://teamup.com/ksec34ba03935daa85" target="_blank">See what's on</a> 📆
-    </div>
-
 </body>
 
 </html>

@@ -1,24 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;500;600&display=swap');
 
 * {
+    border: 0 solid transparent;
+    color: #0f0f0f;
+    font-family: 'Montserrat', sans-serif;
     margin: 0;
     padding: 0;
-    border: 0 solid transparent;
-    font-family: 'Montserrat', sans-serif;
 }
 
 body {
-    overflow: hidden;
-    max-width: 600px;
     margin: auto;
+    max-width: 600px;
+    overflow: hidden;
 }
 
 header {
-    padding: 1rem;
+    align-items: center;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
+    padding: 1rem;
 }
 
 .logo {
@@ -27,30 +28,68 @@ header {
 }
 
 h1 {
-    text-transform: uppercase;
-    font-weight: 400;
     font-size: 1.2rem;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+a {
+    color: orange;
+    font-weight: 600;
 }
 
 b {
     font-weight: 600;
 }
 
-.blurb,
-.info {
-    padding: 1rem;
+.main {
+    display: flex;
+    flex-direction: column;
     line-height: 1.5;
-}
-
-.text-boxes {
-    width: 15rem;
-    margin: auto;
+    padding: 1rem;
 }
 
 input {
-    border: 1px solid;
+    align-self: center;
     border-radius: 2px;
+    border: 1px solid;
+    margin: 1rem;
+    padding: 15px;
+    width: 13rem;
+}
+
+.status-label {
+    align-self: center;
+    background-color: grey;
+    border-radius: 100px;
+    border: 1px solid;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 500;
     padding: 5px;
-    margin: 3px;
-    width: 100%;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    width: 10rem;
+}
+
+canvas {
+    align-self: center;
+    padding: 5px;
+    width: 20rem;
+}
+
+.manage-membership-link {
+    align-self: center;
+    color: gray;
+    font-size: 0.75rem;
+    font-weight: 200;
+    text-transform: uppercase;
+}
+
+.calendar-link {
+    color: gray;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
 }
