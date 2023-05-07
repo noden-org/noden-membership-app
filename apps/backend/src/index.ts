@@ -1,6 +1,5 @@
 import express from 'express';
 import cors from 'cors';
-import rateLimit from 'express-rate-limit';
 import path from 'path';
 import morgan from 'morgan';
 
@@ -10,12 +9,6 @@ const PORT = process.env.PORT || (process.env.APPLICATION_ENV === 'local' ? 3001
 
 const app = express();
 
-const limiter = rateLimit({
-  windowMs: 10 * 60 * 1000, // 10 mins
-  max: 50,
-});
-
-app.use(limiter);
 app.set('trust proxy', 1);
 app.use(express.static(path.join(__dirname, '../../frontend/dist')));
 app.use(cors());
