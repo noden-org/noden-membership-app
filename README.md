@@ -14,18 +14,38 @@ The app is built using [Node.js](https://nodejs.org/en) and includes a static we
 
 ## Get started
 
+### Prerequisites
+
+- Node.js >= 16
+
 ### Install dependencies
 
 ```sh
 npm install
 ```
 
+### Starting the development server
+
+The following command starts the frontend at http://localhost:3000 and the backend at http://localhost:3001.
+
+```sh
+npm run dev
+```
+
+### Building the application locally
+
+To create a production build of the application locally, run the following:
+
+```sh
+npm run build-local && npm run start-local
+```
+
 ### Add the Moonclerk API key
 
 1. Rename `.env.template` to `.env`
-1. Update the value of the `MOONCLERK_API_KEY` to the real key . It should look something like this: `56772fc8d647856b7204ebc25346a6a0`.
+1. Update the value of the `MOONCLERK_API_KEY` to the real key. It should look something like this: `56772fc8d647856b7204ebc25346a6a0`.
 
-### Run on http://localhost:5100
+### Run on http://localhost:3000
 
 ```sh
 npn run dev
@@ -33,4 +53,4 @@ npn run dev
 
 ### Real deployment
 
-The app is currently deployed on [Railway](https://railway.app). Reach out to [Raj](https://github.com/siliconwitch) for access.
+The app is currently deployed on [Railway](https://railway.app). Reach out to [Raj](https://github.com/siliconwitch) or [Julian](https://github.com/sigalor) for access.

@@ -1,27 +1,27 @@
 {
-  "name": "noden-membership-app",
-  "version": "1.0.0",
-  "description": "A web app to create and check Noden community memberships.",
-  "main": "main.js",
+  "name": "@noden-org/noden-membership-app",
+  "private": true,
   "scripts": {
-    "start": "node main",
-    "dev": "nodemon main"
-  },
-  "author": "Raj Nakarja",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/noden-org/noden-membership-app"
-  },
-  "license": "ISC",
-  "dependencies": {
-    "apicache": "^1.6.3",
-    "cors": "^2.8.5",
-    "dotenv": "^16.0.3",
-    "express": "^4.18.2",
-    "express-rate-limit": "^6.7.0",
-    "needle": "^3.2.0"
+    "build-local": "dotenv -v APPLICATION_ENV=local -- turbo run build --no-daemon",
+    "build-production": "dotenv -v APPLICATION_ENV=production -- turbo run build --no-daemon",
+    "clean": "turbo run clean --no-daemon",
+    "dev": "dotenv -v APPLICATION_ENV=local -- turbo run dev --no-daemon",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,md}\"",
+    "start-local": "dotenv -v APPLICATION_ENV=local -- turbo run start --no-daemon",
+    "start-production": "dotenv -v APPLICATION_ENV=production -- node apps/backend/dist"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22"
+    "dotenv-cli": "^7.2.1",
+    "prettier": "latest",
+    "turbo": "^1.9.3"
+  },
+  "packageManager": "npm@9.5.1",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "dependencies": {
+    "antd": "^5.4.7"
   }
 }
