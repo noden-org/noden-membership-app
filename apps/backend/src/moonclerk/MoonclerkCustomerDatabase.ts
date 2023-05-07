@@ -54,8 +54,6 @@ export default class MoonclerkCustomerDatabase {
       const newCustomers = await this.loadAllCustomers();
       this.customers = {};
 
-      console.log(newCustomers.find(c => c.subscription.status === 'active')!.email);
-
       for (const customer of newCustomers) {
         if (this.customers[customer.email] && this.customers[customer.email].id !== customer.id) {
           console.warn(
