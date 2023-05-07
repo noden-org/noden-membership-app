@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "build-local": "dotenv -v APPLICATION_ENV=local -- turbo run build --no-daemon",
-    "build-production": "dotenv -v APPLICATION_ENV=production -- turbo run build --no-daemon",
+    "build-production": "dotenv -v APPLICATION_ENV=production -- turbo run build --no-daemon --no-cache",
     "clean": "turbo run clean --no-daemon",
     "dev": "dotenv -v APPLICATION_ENV=local -- turbo run dev --no-daemon",
     "lint": "turbo run lint",
