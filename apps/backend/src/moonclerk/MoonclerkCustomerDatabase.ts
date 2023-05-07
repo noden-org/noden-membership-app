@@ -27,7 +27,7 @@ export default class MoonclerkCustomerDatabase {
 
     while (true) {
       const newCustomers = await this.loadCustomers(100, offset);
-      if (newCustomers.length === 0 || offset > 100) break;
+      if (newCustomers.length === 0) break;
       customers = customers.concat(newCustomers);
       offset += 100;
     }
