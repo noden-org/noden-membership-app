@@ -11,9 +11,6 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^4.29.5",
-    "@types/node": "20.1.0",
-    "@types/react": "18.2.6",
-    "@types/react-dom": "18.2.4",
     "lodash": "^4.17.21",
     "next": "13.4.1",
     "next-pwa": "^5.6.0",
@@ -25,9 +22,9 @@
   "devDependencies": {
     "@noden-org/tsconfig": "*",
     "@types/lodash": "^4.14.194",
-    "@types/node": "^17.0.12",
-    "@types/react": "^18.0.22",
-    "@types/react-dom": "^18.0.7",
+    "@types/node": "20.1.0",
+    "@types/react": "18.2.6",
+    "@types/react-dom": "18.2.4",
     "cross-env": "^7.0.3",
     "rimraf": "^5.0.0",
     "serve": "^14.2.0",
