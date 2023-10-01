@@ -2,14 +2,14 @@
   "name": "@noden-org/noden-membership-app",
   "private": true,
   "scripts": {
-    "build-local": "dotenv -v APPLICATION_ENV=local -- turbo run build --no-daemon",
-    "build-production": "dotenv -v APPLICATION_ENV=production -- turbo run build --no-daemon",
+    "build-local": "dotenv -v APPLICATION_ENV=local -- turbo run build --force --no-daemon",
+    "build-production": "dotenv -v APPLICATION_ENV=production -- turbo run build --force --no-daemon",
     "clean": "turbo run clean --no-daemon",
     "dev": "dotenv -v APPLICATION_ENV=local -- turbo run dev --no-daemon",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,md}\"",
-    "start-local": "dotenv -v APPLICATION_ENV=local -- turbo run start --no-daemon",
-    "start-production": "dotenv -v APPLICATION_ENV=production -- node apps/backend/dist"
+    "start-local": "dotenv -v APPLICATION_ENV=local -- turbo run start --force --no-daemon",
+    "start-production": "dotenv -v APPLICATION_ENV=production -- node ./apps/backend/dist"
   },
   "devDependencies": {
     "dotenv-cli": "^7.3.0",
