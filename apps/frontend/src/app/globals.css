@@ -10,9 +10,3 @@ body {
     max-width: 600px;
     overflow: hidden;
 }
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-}
