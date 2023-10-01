@@ -23,9 +23,6 @@ export default function Home() {
       </header>
 
       <main className={styles.main}>
-        <p style={{ marginBottom: '1rem' }}>
-          <b>Hey there! </b>Want to join or check your membership?
-        </p>
         <MembershipChecker />
       </main>
     </>

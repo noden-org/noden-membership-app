@@ -6,7 +6,7 @@
   padding: 1rem;
 }
 
-.main-heading {
+.mainHeading {
   font-size: 1.2rem;
   font-weight: 400;
   text-transform: uppercase;
@@ -17,34 +17,4 @@
   flex-direction: column;
   line-height: 1.5;
   padding: 1rem;
-}
-
-.status-label {
-  align-self: center;
-  background-color: grey;
-  border-radius: 100px;
-  border: 1px solid;
-  color: white;
-  font-size: 0.75rem;
-  font-weight: 500;
-  padding: 5px;
-  text-align: center;
-  text-decoration: none;
-  text-transform: uppercase;
-  width: 10rem;
-}
-
-.manage-membership-link {
-  align-self: center;
-  color: gray;
-  font-size: 0.75rem;
-  font-weight: 200;
-  text-transform: uppercase;
-}
-
-.calendar-link {
-  color: gray;
-  font-size: 0.75rem;
-  font-weight: 500;
-  text-transform: uppercase;
 }

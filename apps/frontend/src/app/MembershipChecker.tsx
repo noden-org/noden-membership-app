@@ -5,10 +5,11 @@ import { Input } from 'antd';
 import Link from 'next/link';
 import debounce from 'lodash/debounce';
 import { useQuery } from '@tanstack/react-query';
-import { notification, Tag, QRCode } from 'antd';
+import { notification, QRCode } from 'antd';
 import isEmail from 'validator/es/lib/isEmail';
 
 import { getConfig } from './config';
+import styles from './MembershipChecker.module.css';
 
 function useMembershipByEmail(email: string): any {
   const queryResult = useQuery({
@@ -34,7 +35,9 @@ function useMembershipByEmail(email: string): any {
 }
 
 export default function MembershipChecker() {
-  const [email, setEmail] = useState('');
+  const emailFromQuery = window ? new URLSearchParams(window.location.search).get('email') ?? '' : '';
+
+  const [email, setEmail] = useState(emailFromQuery);
   const [emailDebounced, setEmailDebounced] = useState('');
   const debounceEmail = useRef(debounce(email => setEmailDebounced(email), 500)).current;
 
@@ -42,47 +45,62 @@ export default function MembershipChecker() {
 
   useEffect(() => {
     debounceEmail(email);
+
+    // Update URL query string with email
+    if (window && isEmail(email)) {
+      const url = new URL(window.location.href);
+      url.searchParams.set('email', email);
+      window.history.replaceState({}, '', url.toString());
+    }
   }, [email]);
 
   return (
     <>
+      <p style={{ marginBottom: '1.5rem', textAlign: 'center' }}>
+        <b>Hey there! </b>Enter your email address to check your membership. You can bookmark this page for easier
+        checking next time.
+      </p>
+
       <Input.Search
         type="email"
         placeholder="amazing.soul@noden.org"
         value={email}
         onChange={e => setEmail(e.target.value)}
         loading={membership.isFetching}
-        style={{ marginBottom: '1rem' }}
+        style={{ marginBottom: '1.5rem' }}
       />
 
       {membership?.data && !membership?.data?.error ? (
         <>
-          <p style={{ marginBottom: '1rem' }}>
-            Membership status of <b>{emailDebounced}</b>:{' '}
-            <Tag color={membership.data.status === 'active' ? 'green' : 'red'}>{membership.data.status}</Tag>
-          </p>
+          <span
+            style={{ backgroundColor: membership.data.status === 'active' ? 'green' : 'red' }}
+            className={styles.statusLabel}
+          >
+            {
+              ({ active: 'active', canceled: 'canceled', unpaid: 'unpaid', 'not-a-member': 'not a member' } as any)[
+                membership.data.status
+              ]
+            }
+          </span>
 
           {membership.data.status === 'active' ? (
-            <>
-              <p style={{ marginBottom: '1rem' }}>Show this QR code to the workshop leader to check in:</p>
-              <QRCode value={emailDebounced} style={{ alignSelf: 'center', marginBottom: '1rem' }} />
-            </>
+            <QRCode
+              value={'https://membership.noden.org/?' + new URLSearchParams({ email: emailDebounced }).toString()}
+              style={{ alignSelf: 'center', marginBottom: '1rem' }}
+              size={256}
+            />
           ) : null}
 
           {membership.data.status === 'not-a-member' ? (
-            <p style={{ marginBottom: '1rem' }}>
-              <Link href="https://www.noden.org/membership" target="_blank">
-                Click here to become a member now!
-              </Link>
-            </p>
+            <Link href="https://www.noden.org/membership" target="_blank" className={styles.manageMembershipLink}>
+              Click here to become a member now!
+            </Link>
           ) : null}
 
           {membership.data.management_url ? (
-            <p style={{ marginBottom: '1rem' }}>
-              <Link href={membership.data.management_url} target="_blank">
-                Click here to manage your membership.
-              </Link>
-            </p>
+            <Link href={membership.data.management_url} target="_blank" className={styles.manageMembershipLink}>
+              Manage membership
+            </Link>
           ) : null}
         </>
       ) : null}

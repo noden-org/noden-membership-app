@@ -1,0 +1,30 @@
+.statusLabel {
+  align-self: center;
+  background-color: grey;
+  border-radius: 100px;
+  border: 1px solid;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 5px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  width: 10rem;
+  margin-bottom: 1.5rem;
+}
+
+.manageMembershipLink {
+  align-self: center;
+  color: #111;
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.calendarLink {
+  color: gray;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
