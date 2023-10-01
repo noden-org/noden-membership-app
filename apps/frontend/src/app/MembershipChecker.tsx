@@ -68,7 +68,8 @@ export default function MembershipChecker() {
         value={email}
         onChange={e => setEmail(e.target.value)}
         loading={membership.isFetching}
-        style={{ marginBottom: '1.5rem', fontSize: '16px' }}
+        style={{ marginBottom: '1.5rem' }}
+        size="large"
       />
 
       {membership?.data && !membership?.data?.error ? (
