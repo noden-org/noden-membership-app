@@ -7,7 +7,7 @@ export default class MoonclerkCustomerDatabase {
 
   // stores when the database was last refreshed
   private lastRefresh: Date | undefined;
-  private isRefreshing: boolean = false;
+  public isRefreshing: boolean = false;
 
   private async loadCustomers(count: number, offset: number): Promise<MoonclerkCustomer[]> {
     console.log(`Loading ${count} customers from Moonclerk from offset ${offset}...`);
@@ -35,8 +35,12 @@ export default class MoonclerkCustomerDatabase {
     return customers;
   }
 
+  needsRefresh() {
+    return !this.lastRefresh || +new Date() - +this.lastRefresh > 24 * 60 * 60 * 1000;
+  }
+
   async refresh() {
-    if (!this.lastRefresh || +new Date() - +this.lastRefresh > 24 * 60 * 60 * 1000) {
+    if (this.needsRefresh()) {
       if (this.isRefreshing) {
         console.log('Waiting for Moonclerk customer database to finish refreshing...');
         while (this.isRefreshing) {

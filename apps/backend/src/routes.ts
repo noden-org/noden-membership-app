@@ -39,4 +39,17 @@ router.get('/membership', async (req, res) => {
   }
 });
 
+router.get('/health', async (req, res) => {
+  if (moonclerkCustomerDatabase.needsRefresh()) {
+    // note: do not await here, we want to return immediately
+    moonclerkCustomerDatabase.refresh();
+
+    // return HTTP status to indicate that the database is stale
+    res.status(503).json({ error: 'Moonclerk customer database is stale' });
+    return;
+  }
+
+  res.status(200).json({ status: 'ok' });
+});
+
 export default router;
