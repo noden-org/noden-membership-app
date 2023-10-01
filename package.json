@@ -12,16 +12,13 @@
     "start-production": "dotenv -v APPLICATION_ENV=production -- node apps/backend/dist"
   },
   "devDependencies": {
-    "dotenv-cli": "^7.2.1",
+    "dotenv-cli": "^7.3.0",
     "prettier": "latest",
-    "turbo": "^1.9.3"
+    "turbo": "^1.10.14"
   },
   "packageManager": "npm@9.5.1",
   "workspaces": [
     "apps/*",
     "packages/*"
-  ],
-  "dependencies": {
-    "antd": "^5.4.7"
-  }
+  ]
 }
