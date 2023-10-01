@@ -35,7 +35,8 @@ function useMembershipByEmail(email: string): any {
 }
 
 export default function MembershipChecker() {
-  const emailFromQuery = window ? new URLSearchParams(window.location.search).get('email') ?? '' : '';
+  const emailFromQuery =
+    typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get('email') ?? '' : '';
 
   const [email, setEmail] = useState(emailFromQuery);
   const [emailDebounced, setEmailDebounced] = useState('');
@@ -47,7 +48,7 @@ export default function MembershipChecker() {
     debounceEmail(email);
 
     // Update URL query string with email
-    if (window && isEmail(email)) {
+    if (typeof window !== 'undefined' && isEmail(email)) {
       const url = new URL(window.location.href);
       url.searchParams.set('email', email);
       window.history.replaceState({}, '', url.toString());
