@@ -59,15 +59,12 @@ export default class MoonclerkCustomerDatabase {
       this.customers = {};
 
       for (const customer of newCustomers) {
-        if (this.customers[customer.email] && this.customers[customer.email]?.id !== customer.id) {
-          if (
-            this.customers[customer.email].subscription.status === 'active' &&
-            customer.subscription.status === 'active'
-          ) {
+        const email = customer.email.toLowerCase();
+
+        if (this.customers[email] && this.customers[email]?.id !== customer.id) {
+          if (this.customers[email].subscription.status === 'active' && customer.subscription.status === 'active') {
             console.warn(
-              `WARNING: More than one active subscription for customer email ${customer.email} with different IDs: ${
-                this.customers[customer.email].id
-              } and ${customer.id}`,
+              `WARNING: More than one active subscription for customer email ${email} with different IDs: ${this.customers[email].id} and ${customer.id}`,
             );
           }
 
@@ -77,7 +74,7 @@ export default class MoonclerkCustomerDatabase {
           }
         }
 
-        this.customers[customer.email.toLowerCase()] = customer;
+        this.customers[email] = customer;
       }
       this.isRefreshing = false;
 
