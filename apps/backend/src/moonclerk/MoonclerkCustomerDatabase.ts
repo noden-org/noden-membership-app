@@ -59,12 +59,22 @@ export default class MoonclerkCustomerDatabase {
       this.customers = {};
 
       for (const customer of newCustomers) {
-        if (this.customers[customer.email] && this.customers[customer.email].id !== customer.id) {
-          console.warn(
-            `WARNING: Duplicate customer email ${customer.email} with different IDs: ${
-              this.customers[customer.email].id
-            } and ${customer.id}`,
-          );
+        if (this.customers[customer.email] && this.customers[customer.email]?.id !== customer.id) {
+          if (
+            this.customers[customer.email].subscription.status === 'active' &&
+            customer.subscription.status === 'active'
+          ) {
+            console.warn(
+              `WARNING: More than one active subscription for customer email ${customer.email} with different IDs: ${
+                this.customers[customer.email].id
+              } and ${customer.id}`,
+            );
+          }
+
+          if (customer.subscription.status !== 'active') {
+            // one email address can have multiple subscriptions, but always prioritize the active one
+            continue;
+          }
         }
 
         this.customers[customer.email.toLowerCase()] = customer;
