@@ -7,7 +7,7 @@ export default class MoonclerkCustomerDatabase {
 
   // stores when the database was last refreshed
   private lastRefresh: Date | undefined;
-  public isRefreshing: boolean = false;
+  public lastStartedRefreshing: Date | undefined;
 
   private async loadCustomers(count: number, offset: number): Promise<MoonclerkCustomer[]> {
     console.log(`Loading ${count} customers from Moonclerk from offset ${offset}...`);
@@ -21,15 +21,20 @@ export default class MoonclerkCustomerDatabase {
     return apiRes.body.customers;
   }
 
-  private async loadAllCustomers(): Promise<MoonclerkCustomer[]> {
+  private async loadAllCustomers(): Promise<MoonclerkCustomer[] | undefined> {
     let customers: MoonclerkCustomer[] = [];
     let offset = 0;
+    let lastStartedRefreshingThisInvocation = new Date(+this.lastStartedRefreshing!);
 
     while (true) {
       const newCustomers = await this.loadCustomers(100, offset);
       if (newCustomers.length === 0) break;
       customers = customers.concat(newCustomers);
       offset += 100;
+    }
+
+    if (+lastStartedRefreshingThisInvocation !== +this.lastStartedRefreshing!) {
+      return undefined;
     }
 
     return customers;
@@ -41,12 +46,16 @@ export default class MoonclerkCustomerDatabase {
 
   async refresh() {
     if (this.needsRefresh()) {
-      if (this.isRefreshing) {
-        console.log('Waiting for Moonclerk customer database to finish refreshing...');
-        while (this.isRefreshing) {
-          await new Promise(resolve => setTimeout(resolve, 100));
+      if (this.lastStartedRefreshing) {
+        if (+new Date() - +this.lastStartedRefreshing > 30 * 60 * 1000) {
+          console.log('Seems like the refresh got stuck for more than 30 minutes, retrying...');
+        } else {
+          console.log('Waiting for Moonclerk customer database to finish refreshing...');
+          while (this.lastStartedRefreshing) {
+            await new Promise(resolve => setTimeout(resolve, 100));
+          }
+          return;
         }
-        return;
       }
       console.log(
         'Refreshing Moonclerk customer database because it is stale (last refresh: ' +
@@ -54,8 +63,12 @@ export default class MoonclerkCustomerDatabase {
           ')',
       );
 
-      this.isRefreshing = true;
+      this.lastStartedRefreshing = new Date();
       const newCustomers = await this.loadAllCustomers();
+      if (!newCustomers) {
+        console.warn('Ignored previous Moonclerk database update because another one was initiated in the meantime');
+        return;
+      }
       this.customers = {};
 
       for (const customer of newCustomers) {
@@ -76,7 +89,7 @@ export default class MoonclerkCustomerDatabase {
 
         this.customers[email] = customer;
       }
-      this.isRefreshing = false;
+      this.lastStartedRefreshing = undefined;
 
       this.lastRefresh = new Date();
     }
