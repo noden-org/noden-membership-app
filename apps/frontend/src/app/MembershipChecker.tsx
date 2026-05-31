@@ -80,7 +80,7 @@ export default function MembershipChecker() {
           >
             {
               ({ active: 'active', canceled: 'canceled', unpaid: 'unpaid', 'not-a-member': 'not a member' } as any)[
-              membership.data.status
+                membership.data.status
               ]
             }
           </span>
