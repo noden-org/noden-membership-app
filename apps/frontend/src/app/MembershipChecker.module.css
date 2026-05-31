@@ -28,3 +28,8 @@
   font-weight: 500;
   text-transform: uppercase;
 }
+
+.contactSupportLink {
+  color: gray;
+  font-weight: 500;
+}

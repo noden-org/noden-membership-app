@@ -80,7 +80,7 @@ export default function MembershipChecker() {
           >
             {
               ({ active: 'active', canceled: 'canceled', unpaid: 'unpaid', 'not-a-member': 'not a member' } as any)[
-                membership.data.status
+              membership.data.status
               ]
             }
           </span>
@@ -91,6 +91,17 @@ export default function MembershipChecker() {
               style={{ alignSelf: 'center', marginBottom: '1rem' }}
               size={256}
             />
+          ) : null}
+
+          {(membership.data.status === 'canceled' || membership.data.status === 'unpaid') ? (
+            <p style={{ marginBottom: '1.5rem', textAlign: 'center' }}>
+              If you recently activated your membership, it might take a while for the status to update.
+              <br/>You can see the status live at the <b>Manage Membership</b> link.
+              <br/>If you have any questions, feel free to reach out to us at{' '}
+              <Link href='mailto:hello@noden.org' target="_blank" className={styles.contactSupportLink}>
+                hello@noden.org
+              </Link>
+            </p>
           ) : null}
 
           {membership.data.status === 'not-a-member' ? (
